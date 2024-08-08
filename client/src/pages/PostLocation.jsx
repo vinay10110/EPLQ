@@ -55,7 +55,6 @@ const LocationForm = () => {
   }, [locationUpdate]);
 
 
-
   const handlecoordinates = (coords) => {
     setLocation((prev) => ({
       ...prev,
@@ -249,16 +248,16 @@ const LocationForm = () => {
     );
   };
   const handleSubmitUpdate = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/location`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/locations`, {
       method: 'PUT',
-      body: JSON.stringify(locationUpdate, location),
+      body: JSON.stringify({locationUpdate, location}),
       headers: {
         'content-type': 'application/json',
         'Authorization': `${token}`
       }
     })
     if (response.ok) {
-      console.log(response);
+      navigate('/dashboard')
     }
   }
   const chooseOptions = { icon: 'pi pi-fw pi-images', iconOnly: true, className: 'custom-choose-btn p-button-rounded p-button-outlined' };

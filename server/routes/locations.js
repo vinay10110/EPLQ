@@ -23,11 +23,11 @@ router.post('/',(req,res)=>{
   })
     router.put('/',(req,res)=>{
       const token=req.headers.authorization;
-      const {id,location}=req.body;
+      const {locationUpdate,location}=req.body;
       jwt.verify(token,secret,{},async(err,info)=>{
           try {
-          await Location.findByIdAndUpdate(id,{
-              location
+          await Location.findByIdAndUpdate(locationUpdate.id,{
+              ...location
             })
            return  res.status(206).json({message:'location details updated succesfully'});
           } catch (error) {
