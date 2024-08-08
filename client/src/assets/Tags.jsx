@@ -10,7 +10,6 @@ const tags = [
   { name: "Library" },
   { name: "Gym" },
   { name: "Pharmacy" },
-  { name: "Hotel" },
   { name: "Airport" },
   { name: "Train Station" },
   { name: "Bus Stop" },

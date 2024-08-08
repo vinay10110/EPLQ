@@ -1,16 +1,17 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext,useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { UserContext } from '../components/UserContext';
-import { Carousel, Button, Chips, ProgressSpinner } from 'primereact';
+import { Carousel, Button, Chips, ProgressSpinner,confirmDialog,ConfirmDialog,Toast } from 'primereact';
 import Comments from '../components/Comments';
 import PostLocation from '../pages/PostLocation';
 
 const LocationPage = () => {
+  const toast = useRef(null);
   const { userInfo } = useContext(UserContext);
   const { id } = useParams();
   const [coordinates, setCoordinates] = useState([0, 0]);
@@ -131,10 +132,25 @@ const LocationPage = () => {
       });
     }
   };
-
+  const confirm1 = (id) => {
+    confirmDialog({
+        message: 'Are you sure you want to proceed?',
+        header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        defaultFocus: 'accept',
+        accept :()=>{
+          toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 2000 });
+                handleLocDelete(id)
+        },
+        reject
+    });
+};
+const reject = () => {
+  toast.current.show({ severity: 'info', summary: 'canceled', detail: 'canceled the request', life: 2000 });
+}
   return (
     <>
-
+<Toast ref={toast} />
       {
         !loading ? (<div className="surface-section">
           <button
@@ -171,10 +187,11 @@ const LocationPage = () => {
           <div className="flex justify-content-center">
             {userInfo._id === location.user && (
               <>
+              <ConfirmDialog />
                 <Button style={{ marginRight: '5px',marginBottom:'5px' }} onClick={handleLocUpdate}>
                   Edit
                 </Button>
-                <Button severity="danger" style={{marginBottom:'5px' }} onClick={() => handleLocDelete(location._id)}>
+                <Button severity="danger" style={{marginBottom:'5px' }} onClick={()=>confirm1(location._id)}>
                   Delete
                 </Button>
               </>

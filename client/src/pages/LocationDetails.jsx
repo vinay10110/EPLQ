@@ -67,7 +67,7 @@ const LocationDetails = ({ location, setLocation }) => {
           <FloatLabel>
           <label htmlFor="tags">Tags:</label>
         <MultiSelect value={location.tags} onChange={ev=>setSelectedTags(ev.target.value)} options={tags} optionLabel="name" 
-                filter  placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />
+                filter  placeholder="Select Tags" maxSelectedLabels={3} className="w-full md:w-20rem" />
           </FloatLabel>
         </div>
         <div>
