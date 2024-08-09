@@ -5,7 +5,6 @@ import { StepperPanel } from 'primereact/stepperpanel';
 import { useNavigate, useParams } from 'react-router-dom';
 import LocationDetails from './LocationDetails';
 import { FileUpload, Dialog, Button, Tooltip, Toast, Tag, Stepper } from 'primereact';
-import { ProgressBar } from 'primereact/progressbar';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../firebase';
 import Mapper from '../components/Mapper';
@@ -180,18 +179,12 @@ const LocationForm = () => {
 
   const headerTemplate = (options) => {
     const { className, chooseButton, uploadButton, cancelButton } = options;
-    const value = totalSize / 10000;
-    const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
-
+    console.log(uploadButton)
     return (
       <div className={className} style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}>
         {chooseButton}
         {uploadButton}
         {cancelButton}
-        <div className="flex align-items-center gap-3 ml-auto">
-          <span>{formatedValue} / 10 MB</span>
-          <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
-        </div>
       </div>
     );
   };

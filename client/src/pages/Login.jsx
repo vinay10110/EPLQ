@@ -3,7 +3,6 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown,Toast,Button,ProgressSpinner,Card,FloatLabel,Password } from 'primereact';
 import {Navigate,Link} from 'react-router-dom';
 import 'primeflex/primeflex.css'; 
-
 const Login = () => {
     const toast=useRef(null)
     const [email, setEmail] = useState('');
@@ -26,19 +25,22 @@ const handleSubmit=async()=>{
     if(response.ok){
         toast.current.show({ severity: 'success', summary: 'Success', detail: 'Login successful', life: 1000 });
         localStorage.setItem('token',data.token);
+        setLoading(false);
         setRedirect(true);
+   
     }
-    setLoading(false);
+  
 }
 if(redirect){
     return <Navigate to='/dashboard' />
 }
     return (
         <>
+        <Toast ref={toast} />
         {
-            !loading?(<div className='flex justify-content-center align-content-center' style={{width:'100%',height:'100vh'}}><ProgressSpinner /> </div>):(<>
+            loading?(<div className='flex justify-content-center align-content-center' style={{width:'100%',height:'100vh'}}><ProgressSpinner /> </div>):(<>
              <div className="flex justify-content-center align-items-center min-h-screen" style={{backgroundImage: 'linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)'}}>
-           <Toast ref={toast} />
+           
             <Card className="p-fluid" style={{ 
                 
                 width: '30rem',
