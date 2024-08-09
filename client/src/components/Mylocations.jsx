@@ -39,7 +39,7 @@ const Mylocations = () => {
     };
     const getRating = (locId) => {
         const filterData = comment.filter((comment) => comment.location === locId);
-        if (filterData.length === 0) return 0; // Return 0 if no comments
+        if (filterData.length === 0) return 0; 
         const sum = filterData.reduce((acc, curr) => acc + curr.rating, 0);
         return sum / filterData.length;
     }

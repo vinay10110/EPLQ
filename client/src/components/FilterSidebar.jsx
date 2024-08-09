@@ -4,11 +4,9 @@ import { Button,Checkbox,Dropdown,Sidebar } from 'primereact';
 import { useState } from 'react';
 import GroupedCities from '../assets/GroupedCities';
 import Tags from '../assets/Tags';
-
 const FilterSidebar = ({ visible, onHide, setFilterCity, setFilterTags }) => {
     const [city, setCity] = useState(null);
     const [tags, setTags] = useState([]);
-
     const handleCityChange = (e) => {
         setCity(e.value);
     };
@@ -28,12 +26,11 @@ const FilterSidebar = ({ visible, onHide, setFilterCity, setFilterTags }) => {
 
     const groupedItemTemplate = (option) => {
         return (
-            <div className="flex align-items-center">
-                <img alt={option.label} src="https://primefaces.org/cdn/primereact/images/flag/flag_placeholder.png" className={`mr-2 flag flag-${option.code.toLowerCase()}`} style={{ width: '18px' }} />
-                <div>{option.label}</div>
-            </div>
+          <div className="flex align-items-center">
+            <div style={{fontWeight:'900px',fontSize:'25px'}}>{option.label}</div>
+          </div>
         );
-    };
+      };
 
     const handleSubmit = () => {
         setFilterCity(city);

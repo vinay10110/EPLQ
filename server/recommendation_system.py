@@ -87,5 +87,5 @@ if __name__ == '__main__':
     user_id = sys.argv[2]
     target_location = fetch_location_by_id(location_id)
     locations = fetch_all_locations()
-    recommendations = recommend_locations(locations, target_location, num_recommendations=3)
+    recommendations = recommend_locations(locations, target_location, num_recommendations=1)
     save_recommendations(user_id, recommendations)

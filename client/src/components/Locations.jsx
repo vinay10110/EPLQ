@@ -114,30 +114,23 @@ const Locations = ({ filterCity, filterTags }) => {
        else if (filterTags) {
         const addedLocations = new Set();
         filterData = locations.filter(location => {
-            // Check if location or its tags are null or undefined
             if (!location || !location.tags) {
-                console.log('Skipping location due to null or undefined tags:', location);
                 return false;
             }
-        
-            // Check if the location has already been added
             if (addedLocations.has(location.id)) {
-                console.log('Skipping location as it is already added:', location);
+                
                 return false;
             }
-        
-            // Check if the location matches any filterTag
             const isMatching = filterTags.some(filterTag => 
                 location.tags.some(tag => tag.name === filterTag.name)
             );
         
-            // Add the location to the Set if it matches any filterTag
             if (isMatching) {
-                console.log(`Location ${location.id} matches at least one filterTag and is added.`);
+                
                 addedLocations.add(location.id);
                 return true;
             } else {
-                console.log(`Location ${location.id} does not match any filterTag.`);
+               
                 return false;
             }
         });
@@ -162,8 +155,8 @@ const Locations = ({ filterCity, filterTags }) => {
     }
     if (loading) {
         return (
-            <div className="flex justify-content-center align-items-center" style={{ width: '100%', height: '100vh' }}>
-                <ProgressSpinner style={{ width: '50px', height: '50px' }} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
+            <div className="flex justify-content-center align-items-center" style={{ width: '100%', height: '90vh' }}>
+                <ProgressSpinner  />
             </div>
         );
     }
@@ -217,7 +210,7 @@ const Locations = ({ filterCity, filterTags }) => {
                                         <img src={location.imageURLs[0]} alt={location.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
 
                                     }
-                                    style={{ height: 'fit-content' }}
+                                    style={{   height: '450px' }}
                                 >
                                     <p className="m-0">{truncateDescription(location.description, 100)}</p>
 
@@ -250,7 +243,7 @@ const Locations = ({ filterCity, filterTags }) => {
                                                     <img src={location.imageURLs[0]} alt={location.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
 
                                                 }
-                                                style={{ height: 'fit-content' }}
+                                                style={{  height: '450px' }}
                                             >
                                                 <p className="m-0">{truncateDescription(location.description, 100)}</p>
 
@@ -281,7 +274,7 @@ const Locations = ({ filterCity, filterTags }) => {
                                                     <img src={location.imageURLs[0]} alt={location.title} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
 
                                                 }
-                                                style={{ height: 'fit-content' }}
+                                                style={{ height: '450px' }}
                                             >
                                                 <p className="m-0">{truncateDescription(location.description, 100)}</p>
 

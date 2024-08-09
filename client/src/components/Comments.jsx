@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import { Card, Editor, Button, Avatar,Fieldset, Divider, Rating, Dialog,InputTextarea } from 'primereact';
+import {  Button, Avatar,Fieldset, Divider, Rating, Dialog,InputTextarea } from 'primereact';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState,useContext } from 'react';
+import {UserContext} from './UserContext'
 const CommentList = ({locId}) => {
     const [rating, setRating] = useState(null);
     const [comments, setComments] = useState([]);
     const [text, setText] = useState('');
+    const {userInfo}=useContext(UserContext);
     const [visible, setVisible] = useState(false);
     const token = localStorage.getItem('token');
     const [loading,setLoading]=useState(false)
@@ -60,6 +60,19 @@ const CommentList = ({locId}) => {
     useEffect(() => {
         fetchComments();
     }, [locId]);
+    const handleDelete=async(id)=>{
+        const response=await fetch(`${import.meta.env.VITE_API_URL}/comments`,{
+            method:'DELETE',
+            body:JSON.stringify({id}),
+            headers:{
+                'content-type':'application/json',
+                'Authorization':`${token}`
+            }
+        })
+        if(response.ok){
+            fetchComments();
+        }
+    }
     return (
         <>
             <div className='flex justify-content-center flex-column align-items-center' style={{ marginTop: '20px' }}>
@@ -103,7 +116,14 @@ const CommentList = ({locId}) => {
                         <p className="m-0">
                             {comment.text}
                         </p>
+                        <div className='flex justify-content-between'>
                         <Rating value={comment.rating} cancel={false} readOnly></Rating>
+                        {
+                            userInfo._id===comment.user._id && <Button severity="danger" outlined onClick={()=>handleDelete(comment._id)}>Delete</Button>
+                            
+                        }
+                        </div>
+                        
                     </Fieldset>
                     
                     </div>

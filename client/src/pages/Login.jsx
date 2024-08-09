@@ -13,22 +13,29 @@ const Login = () => {
     const types = ['User','Admin'];
 const handleSubmit=async()=>{
     setLoading(true);
-    const response= await fetch(`${import.meta.env.VITE_API_URL}/users/login`,{
-        method:'POST',
-        body:JSON.stringify({email,password,type}),
-        headers:{
-            'content-type':'application/json',
-
+    try {
+        const response= await fetch(`${import.meta.env.VITE_API_URL}/users/login`,{
+            method:'POST',
+            body:JSON.stringify({email,password,type}),
+            headers:{
+                'content-type':'application/json',
+    
+            }
+        })
+        const data=await response.json();
+        if(response.ok){
+            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Login successful', life: 5000 });
+            localStorage.setItem('token',data.token);
+            setRedirect(true);
         }
-    })
-    const data=await response.json();
-    if(response.ok){
-        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Login successful', life: 1000 });
-        localStorage.setItem('token',data.token);
-        setLoading(false);
-        setRedirect(true);
-   
+    } catch (error) {
+        console.log(error)
     }
+    finally{
+        setLoading(false); 
+    }
+    
+    
   
 }
 if(redirect){
@@ -38,7 +45,7 @@ if(redirect){
         <>
         <Toast ref={toast} />
         {
-            loading?(<div className='flex justify-content-center align-content-center' style={{width:'100%',height:'100vh'}}><ProgressSpinner /> </div>):(<>
+            loading?(<div className='flex justify-content-center align-items-center' style={{width:'100%',height:'100vh'}}><ProgressSpinner /> </div>):(<>
              <div className="flex justify-content-center align-items-center min-h-screen" style={{backgroundImage: 'linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)'}}>
            
             <Card className="p-fluid" style={{ 
