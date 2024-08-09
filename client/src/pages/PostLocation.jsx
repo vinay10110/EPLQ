@@ -179,7 +179,6 @@ const LocationForm = () => {
 
   const headerTemplate = (options) => {
     const { className, chooseButton, uploadButton, cancelButton } = options;
-    console.log(uploadButton)
     return (
       <div className={className} style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}>
         {chooseButton}
