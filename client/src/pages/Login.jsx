@@ -36,7 +36,7 @@ if(redirect){
     return (
         <>
         {
-            loading?(<><ProgressSpinner /> </>):(<>
+            loading?(<div className='flex justify-content-center align-content-center' style={{width:'100%',height:'100vh'}}><ProgressSpinner /> </div>):(<>
              <div className="flex justify-content-center align-items-center min-h-screen" style={{backgroundImage: 'linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)'}}>
            <Toast ref={toast} />
             <Card className="p-fluid" style={{ 
