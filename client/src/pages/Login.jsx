@@ -1,10 +1,6 @@
 import  { useRef, useState } from 'react';
-import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
-import { FloatLabel } from 'primereact/floatlabel';
-import { Password } from 'primereact/password';
-import {Button,Toast} from 'primereact';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown,Toast,Button,ProgressSpinner,Card,FloatLabel,Password } from 'primereact';
 import {Navigate,Link} from 'react-router-dom';
 import 'primeflex/primeflex.css'; 
 
@@ -14,8 +10,10 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [type,setType]=useState('');
     const [redirect,setRedirect]=useState(false);
+    const [loading,setLoading]=useState(false);
     const types = ['User','Admin'];
 const handleSubmit=async()=>{
+    setLoading(true);
     const response= await fetch(`${import.meta.env.VITE_API_URL}/users/login`,{
         method:'POST',
         body:JSON.stringify({email,password,type}),
@@ -30,13 +28,16 @@ const handleSubmit=async()=>{
         localStorage.setItem('token',data.token);
         setRedirect(true);
     }
-    
+    setLoading(false);
 }
 if(redirect){
     return <Navigate to='/dashboard' />
 }
     return (
-        <div className="flex justify-content-center align-items-center min-h-screen" style={{backgroundImage: 'linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)'}}>
+        <>
+        {
+            loading?(<><ProgressSpinner /> </>):(<>
+             <div className="flex justify-content-center align-items-center min-h-screen" style={{backgroundImage: 'linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)'}}>
            <Toast ref={toast} />
             <Card className="p-fluid" style={{ 
                 
@@ -84,6 +85,10 @@ if(redirect){
                 
             </Card>
          </div>
+            </>)
+        }
+        </>
+       
     );
 };
 
