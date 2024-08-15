@@ -9,7 +9,6 @@ import { UserContext } from '../components/UserContext';
 import { Carousel, Button, Chips, ProgressSpinner,confirmDialog,ConfirmDialog,Toast } from 'primereact';
 import Comments from '../components/Comments';
 import PostLocation from '../pages/PostLocation';
-
 const LocationPage = () => {
   const toast = useRef(null);
   const { userInfo } = useContext(UserContext);
@@ -134,12 +133,11 @@ const LocationPage = () => {
   };
   const confirm1 = (id) => {
     confirmDialog({
-        message: 'Are you sure you want to proceed?',
+        message: 'Are you sure you want to delete?',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
         defaultFocus: 'accept',
         accept :()=>{
-          toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 2000 });
                 handleLocDelete(id)
         },
         reject

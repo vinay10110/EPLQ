@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDzLSq1GAJtpco7JX_67zizJXkftQcvUiI",
-  authDomain: "eplq-42288.firebaseapp.com",
-  projectId: "eplq-42288",
-  storageBucket: "eplq-42288.appspot.com",
-  messagingSenderId: "472330350143",
-  appId: "1:472330350143:web:69837379b4d4a06eae528a"
+  apiKey: `${import.meta.env.VITE_API_APIKEY}`,
+  authDomain: `${import.meta.env.VITE_API_AUTHDOMAIN}`,
+  projectId: `${import.meta.env.VITE_API_PROJECTID}`,
+  storageBucket: `${import.meta.env.VITE_API_STORAGEBUCKET}`,
+  messagingSenderId: `${import.meta.env.VITE_API_SENDERID}`,
+  appId: `${import.meta.env.VITE_API_APPID}`
 };
 
 const app = initializeApp(firebaseConfig);
