@@ -9,15 +9,17 @@ router.post('/register',async(req,res)=>{
     const {name,email,password,type}=req.body;
     try {
         await User.create({
-            name,
-            email,
-            password:bcrypt.hashSync(password,salt),
-            type,
-        })
-       return  res.status(201).json({message:'created succesfull'})
+          name,
+          email,
+          password:bcrypt.hashSync(password,salt),
+          type,
+      })
+     return  res.status(201).json({message:'created succesfull'})
+      
+        
     } catch (error) {
       if (error.code === 11000) {
-        return res.status(409).json({ message: 'Email already registered' });
+        return res.status(302).json({ message: 'Email already registered' });
     } else {
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });

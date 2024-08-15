@@ -1,16 +1,18 @@
-import  { useState,useRef } from 'react';
-import { Dropdown,Button,Password,FloatLabel,Card,InputText,ProgressSpinner,Toast } from 'primereact';
+import  { useState } from 'react';
+import { Dropdown,Button,Password,FloatLabel,Card,InputText,ProgressSpinner,Message } from 'primereact';
 import {Navigate,Link} from 'react-router-dom';
 import 'primeflex/primeflex.css'; 
 
 const Register = () => {
-    const toast=useRef(null);
+    
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [email,setEmail]=useState('');
     const [type,setType]=useState('');
     const [loading,setLoading]=useState(false);
     const [redirect,setRedirect]=useState(false);
+    const [severity,setSeverity]=useState();
+    const [message,setMessage]=useState();
     const types = ['User','Admin'];
 const handleSubmit=async()=>{
     setLoading(true)
@@ -22,9 +24,12 @@ const handleSubmit=async()=>{
                 'content-type':'application/json',
             }
         })
-        if(response.ok){
-            toast.current.show({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+        if(response.status==201){
            setRedirect(true);
+        }
+        else if(response.status===302){
+            setSeverity("error");
+            setMessage("Email is already registered! please login")
         }
     } catch (error) {
         console.log(error)
@@ -39,7 +44,7 @@ if(redirect){
 }
     return (
         <>
-        <Toast ref={toast} />
+       
         {
             loading ?(<div style={{width:'100%',height:'100vh'}} className='flex jsutify-content-center align-items-center'><ProgressSpinner /></div>):(<>
                 <div className="flex justify-content-center align-items-center min-h-screen" style={{backgroundImage: 'linear-gradient(to top, #dfe9f3 0%, white 100%)'}}>
@@ -94,7 +99,7 @@ if(redirect){
                     <div className='flex justify-content-center'>
                     <p>Already a member?<Link to='/login' style={{textDecorationColor:'none',color:'inherit'}}>Login Here</Link></p>
                     </div>
-                    
+                    <Message severity={severity} text={message} />
                 </Card>
             </div>
                 </>

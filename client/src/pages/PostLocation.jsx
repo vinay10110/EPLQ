@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { useNavigate, useParams } from 'react-router-dom';
 import LocationDetails from './LocationDetails';
-import { FileUpload, Dialog, Button, Tooltip, Toast, Tag, Stepper } from 'primereact';
+import { FileUpload, Dialog, Button, Tooltip, Tag, Stepper } from 'primereact';
 import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../firebase';
 import Mapper from '../components/Mapper';
@@ -12,7 +12,6 @@ import Mapper from '../components/Mapper';
 const LocationForm = () => {
   const locationUpdate = useParams();
   const token = localStorage.getItem('token');
-  const toast = useRef(null);
   const stepperRef = useRef(null);
   const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
@@ -95,7 +94,6 @@ const LocationForm = () => {
         imageURLs: [],
         additionalNotes: '',
       });
-      toast.current.show({ severity: 'success', summary: 'Success', detail: 'Location posted successfully!', life: 3000 });
       navigate('/dashboard');
     }
   }
@@ -257,8 +255,8 @@ const LocationForm = () => {
   const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
   return (
     <>
-    <div className='flex flex-column'>
-    <div className='flex justify-content-end'>
+    <div >
+    <div className='flex justify-content-end' style={{height:'40px'}}>
     <button
         onClick={() => navigate('/dashboard')}
         style={{
@@ -275,10 +273,9 @@ const LocationForm = () => {
       </button>
     </div>
       
-      <Toast ref={toast} />
       <div className=" flex justify-content-center">
 
-        <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }}>
+        <Stepper ref={stepperRef} style={{ flexBasis: '50rem',width:'100%' }} className="stepperClass">
           <StepperPanel header="Post Location Images">
            
               <div>
