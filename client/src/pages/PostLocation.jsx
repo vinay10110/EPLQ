@@ -108,7 +108,7 @@ const LocationForm = () => {
         (snapshot) => {
 
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
+          console.log(progress)
         },
         (error) => {
           console.error('Upload failed:', error);
@@ -143,9 +143,6 @@ const LocationForm = () => {
     setTotalSize(_totalSize);
   };
 
-
-
-
   const onTemplateUpload = async (e) => {
     const files = e.files;
     if (files.length > 0) {
@@ -174,14 +171,14 @@ const LocationForm = () => {
   const onTemplateClear = () => {
     setTotalSize(0);
   };
-
+  
   const headerTemplate = (options) => {
     const { className, chooseButton, uploadButton, cancelButton } = options;
     return (
       <div className={className} style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}>
         {chooseButton}
-        {uploadButton}
         {cancelButton}
+        <Button label="upload" onClick={()=>uploadButton.props.onClick}/> 
       </div>
     );
   };
@@ -293,7 +290,9 @@ const LocationForm = () => {
              
             </div>
             <div className="flex pt-4 justify-content-end">
-              <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+              <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => {
+                stepperRef.current.nextCallback()
+                }} />
             </div>
           </StepperPanel>
           <StepperPanel header="Post Location Details">

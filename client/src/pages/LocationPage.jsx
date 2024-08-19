@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState, useContext,useRef } from 'react';
@@ -8,7 +7,6 @@ import 'leaflet/dist/leaflet.css';
 import { UserContext } from '../components/UserContext';
 import { Carousel, Button, Chips, ProgressSpinner,confirmDialog,ConfirmDialog,Toast } from 'primereact';
 import Comments from '../components/Comments';
-import PostLocation from '../pages/PostLocation';
 const LocationPage = () => {
   const toast = useRef(null);
   const { userInfo } = useContext(UserContext);
@@ -17,7 +15,6 @@ const LocationPage = () => {
   const [location, setLocation] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
   const [userLocation, setUserLocation] = useState();
   const [loadDirection, setLoadDirection] = useState(false);
   const [route, setRoute] = useState([]);
@@ -194,7 +191,7 @@ const reject = () => {
                 </Button>
               </>
             )}
-            {updating && <PostLocation locationUpdate={location} />}
+      
           </div>
 
           <ul className="list-none p-0 m-0">

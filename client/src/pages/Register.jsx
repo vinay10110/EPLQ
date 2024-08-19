@@ -71,29 +71,29 @@ if(redirect){
                 >
                     <div className="field" style={{marginBottom:'25px'}}>
                         <FloatLabel>
-                            <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} required style={{borderRadius:'10px'}}/>
+                            <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} required />
                             <label htmlFor="username">Username</label>
                         </FloatLabel>
                     </div>
                     <div className="field" style={{marginBottom:'25px'}}>
                         <FloatLabel>
-                            <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)}  type='email' required style={{borderRadius:'10px'}}/>
+                            <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)}  type='email' required />
                             <label htmlFor="email">Email</label>
                         </FloatLabel>
                     </div>
                     <div className="field" style={{marginBottom:'25px'}}>
                         <FloatLabel>
-                            <Password id="password" value={password} onChange={(e) => setPassword(e.target.value)} feedback={false} required toggleMask style={{borderRadius:'10px'}}/>
+                            <Password id="password" value={password} onChange={(e) => setPassword(e.target.value)} feedback={false} required toggleMask />
                             <label htmlFor="password">Password</label>
                         </FloatLabel>
                     </div>
                    
                     <div className='field flex justify-content-center'>
                     <Dropdown value={type} onChange={(e) => setType(e.value)} options={types} optionLabel="name" 
-                    placeholder="Select type" className="w-full md:w-14rem" required style={{borderRadius:'10px'}}/>
+                    placeholder="Select type" className="w-full md:w-14rem" required />
                     </div>
                     <div className='flex justify-content-center'>
-                    <Button label='submit' onClick={handleSubmit} style={{borderRadius:'10px',width:'100px',backgroundColor:'inherit',color:'black'}}/>
+                    <Button label='Sign up' onClick={handleSubmit} style={{borderRadius:'10px',width:'100px',backgroundColor:'inherit',color:'black'}}/>
                     </div>
                     
                     <div className='flex justify-content-center'>

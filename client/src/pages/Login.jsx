@@ -85,22 +85,22 @@ const Login = () => {
                             }>
                             <div className="field" style={{ marginBottom: '25px' }}>
                                 <FloatLabel>
-                                    <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)} type='email' style={{ borderRadius: '10px' }} />
+                                    <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)} type='email'  />
                                     <label htmlFor="email">Email</label>
                                 </FloatLabel>
                             </div>
                             <div className="field" style={{ marginBottom: '25px' }}>
                                 <FloatLabel>
-                                    <Password id="password" value={password} onChange={(e) => setPassword(e.target.value)} feedback={false} toggleMask style={{ borderRadius: '10px' }} />
+                                    <Password id="password" value={password} onChange={(e) => setPassword(e.target.value)} feedback={false}  toggleMask  />
                                     <label htmlFor="password">Password</label>
                                 </FloatLabel>
                             </div>
                             <div className='field flex justify-content-center'>
                                 <Dropdown value={type} onChange={(e) => setType(e.value)} options={types} optionLabel="name"
-                                    placeholder="Select type" className="w-full md:w-14rem" style={{ borderRadius: '10px' }} />
+                                    placeholder="Select type" className="w-full md:w-14rem"  />
                             </div>
                             <div className='flex justify-content-center'>
-                                <Button label='Submit' onClick={handleSubmit} style={{ borderRadius: '10px', width: '100px', backgroundColor: 'inherit', color: 'black' }} />
+                                <Button label='Sign in' onClick={handleSubmit} style={{ borderRadius: '10px', width: '100px', backgroundColor: 'inherit', color: 'black' }} />
                             </div>
 
                             <div className='flex justify-content-center'>
