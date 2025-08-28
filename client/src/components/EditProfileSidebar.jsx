@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { InputText, Sidebar, Avatar, FileUpload, Button, Password, FloatLabel } from 'primereact';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { useState, useContext } from 'react';
 import { UserContext } from './UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfileSidebar = ({ visible, onHide }) => {
     const token = localStorage.getItem('token');
@@ -12,6 +14,7 @@ const EditProfileSidebar = ({ visible, onHide }) => {
     const [image, setImage] = useState('');
     const [isEditingImage, setIsEditingImage] = useState(false);
     const [editDetails, setEditDetails] = useState(false);
+    const navigate = useNavigate();
 
     const handleUpload = (event) => {
         console.log("hi");
@@ -74,6 +77,19 @@ const EditProfileSidebar = ({ visible, onHide }) => {
         setEditDetails(false);
     };
 
+    const handleLogout = () => {
+        confirmDialog({
+            message: 'Are you sure you want to log out?',
+            header: 'Logout Confirmation',
+            icon: 'pi pi-info-circle',
+            accept: () => {
+                localStorage.clear();
+                navigate('/');
+                onHide();
+            }
+        });
+    };
+
     return (
         <Sidebar visible={visible} onHide={onHide} position="right">
             <div className="flex flex-column align-items-center h-full justify-content-center">
@@ -127,7 +143,16 @@ const EditProfileSidebar = ({ visible, onHide }) => {
                         )
                     }
                 </div>
+                <div className="flex justify-content-center w-full mt-3">
+                    <Button 
+                        label="Logout" 
+                        icon="pi pi-sign-out" 
+                        onClick={handleLogout}
+                        className="p-button-danger"
+                    />
+                </div>
             </div>
+            <ConfirmDialog />
         </Sidebar>
     );
 };

@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const jwt=require('jsonwebtoken');
-const {spawn}=require('child_process')
+const { generateRecommendations } = require('../utils/recommendationEngine');
 const Location=require('../models/Location');
 const secret=process.env.SECRET;
 router.post('/',(req,res)=>{
@@ -65,8 +65,11 @@ router.post('/',(req,res)=>{
       try {
         const decodedToken=jwt.decode(token);
         const locationDoc=await Location.findById(id);
+        // Generate recommendations asynchronously for users
         if(decodedToken.userType==='User'){
-  const childPython=spawn('python',['recommendation_system.py',id,decodedToken.id]);
+          generateRecommendations(id, decodedToken.id).catch(error => {
+            console.error('Recommendation generation failed:', error);
+          });
         }
        return res.json(locationDoc);
       } catch (error) {

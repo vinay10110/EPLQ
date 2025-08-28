@@ -1,5 +1,4 @@
 const express=require('express');
-const {PythonShell} =require('python-shell')
 require('dotenv').config();
 const mongoose=require('mongoose');
 const cors=require('cors')
@@ -18,6 +17,14 @@ app.use(cors({
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', `${process.env.HOST_ADDRESS}`);
     next();
+  });
+  // Health check endpoint for frontend to verify backend is ready
+  app.get('/health', (req, res) => {
+    res.status(200).json({ 
+      status: 'ok', 
+      message: 'Backend is ready',
+      timestamp: new Date().toISOString()
+    });
   });
   app.use('/users',userRouter);
   app.use('/locations',locationRouter);

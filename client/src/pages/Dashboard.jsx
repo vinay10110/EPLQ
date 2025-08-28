@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar"
 import {useEffect,useContext} from 'react';
 import { UserContext } from "../components/UserContext";
 
-
 const Dashboard = () => {
   const token=localStorage.getItem('token');
   const {setUserInfo}=useContext(UserContext);
@@ -15,15 +14,13 @@ const Dashboard = () => {
         }
        })
        const data=await result.json();
-         setUserInfo(data[0])
+         setUserInfo(data[0]);
     }
     fetchData();
   },[token,setUserInfo])
   return (
     <>
     <Navbar />
-
-   
     </>
   )
 }
