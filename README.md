@@ -1,9 +1,10 @@
 # Efficient Privacy-Preserving Location Query (EPLQ)
 
-Live demo: https://eplq.vercel.app/dashboard
-
 People want to discover interesting places without giving up privacy (e.g., sharing precise device location or behavioral history). Many apps over-collect data to drive personalization.
 
+Live demo: https://eplq.vercel.app
+
+## Project Overview
 A full‑stack web app for discovering, filtering, and recommending locations with user authentication, comments/ratings, and profile management. The backend exposes a REST API with a tag‑based recommendation engine; the frontend is built with React and PrimeReact.
 
 - __No device geolocation required__: Users browse and filter by city/tags; the app does not ask for or store precise user coordinates.
@@ -149,24 +150,6 @@ Base URL: `${VITE_API_URL}` (frontend) or your backend host
 
 - Health (`/health`)
   - `GET /health` – returns `{ status: 'ok' }`
-
-## Recommendation Engine
-- Implemented in Node at `server/utils/recommendationEngine.js`
-- Builds a binary tag vector per location and uses cosine similarity
-- Triggered in `server/routes/locations.js` on `GET /locations/:id` when the requester is a `User`
-- Results saved to `Recommend` collection and can be fetched via `GET /recommendations`
-
-## Scripts
-- Server (`server/package.json`):
-  - `npm run dev` – start with nodemon
-  - `npm start` – start with node
-- Client (`client/package.json`):
-  - `npm run dev` – Vite dev server
-  - `npm run build` – production build
-  - `npm run preview` – preview build locally
-
-## License
-Add your preferred license.
 
 ## Acknowledgements
 - PrimeReact, PrimeFlex, PrimeIcons
