@@ -1,6 +1,6 @@
 # Efficient Privacy-Preserving Location Query (EPLQ)
 
-People want to discover interesting places without giving up privacy (e.g., sharing precise device location or behavioral history). Many apps over-collect data to drive personalization.
+People want to discover interesting places without trading away their privacy. Conventional local discovery apps frequently request precise GPS coordinates, run background location services, and aggregate behavioral telemetry (clicks, dwell time, visit history) to fuel personalization. This creates long‑lived trails of movement and preferences that can be linked across sessions and devices, increasing the risk of profiling and re‑identification. In reality, many use cases do not require personal coordinates at all: city‑level or tag‑based context is enough to surface relevant results. EPLQ demonstrates a privacy‑first approach where users browse and filter by city and tags, recommendations are computed from content metadata (not user tracking), and the system minimizes collection and retention of personal data.
 
 Live demo: https://eplq.vercel.app
 
@@ -26,9 +26,25 @@ These choices provide useful discovery while limiting personal data collection, 
 - **Recommendations**: Tag‑based cosine similarity recommendations generated on location view
 
 ## Tech Stack
-- **Frontend**: React 18, Vite, PrimeReact, PrimeFlex, PrimeIcons, React Router, Leaflet/OL, Firebase Storage
-- **Backend**: Node.js, Express, Mongoose, JWT, bcrypt, CORS, dotenv
-- **Database**: MongoDB (Atlas or self‑hosted)
+- **Frontend**:
+  - React 18, Vite
+  - PrimeReact, PrimeFlex, PrimeIcons
+  - React Router
+  - Leaflet, OpenLayers, react-leaflet
+  - Map SDK: @mapbox/mapbox-sdk
+  - Charts: Chart.js
+  - Rich text editor: Quill
+  - Storage: Firebase Storage
+- **Backend**:
+  - Node.js, Express
+  - Auth: JWT (jsonwebtoken), bcrypt
+  - Data access: Mongoose (MongoDB)
+  - Middlewares/utilities: CORS, dotenv
+  - Dev tooling: nodemon
+- **Database**:
+  - MongoDB (Atlas or self‑hosted)
+- **Deployment**:
+  - Vercel (frontend)
 
 ## Project Structure
 ```
@@ -150,9 +166,3 @@ Base URL: `${VITE_API_URL}` (frontend) or your backend host
 
 - Health (`/health`)
   - `GET /health` – returns `{ status: 'ok' }`
-
-## Acknowledgements
-- PrimeReact, PrimeFlex, PrimeIcons
-- React Router
-- Leaflet / OpenLayers
-- MongoDB, Mongoose
